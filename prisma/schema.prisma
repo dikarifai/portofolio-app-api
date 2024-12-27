@@ -1,0 +1,74 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Summary {
+  id Int @id @default(autoincrement())
+  title String
+  description String
+  imageUrls String[] @db.Text
+}
+
+model Portfolio {
+  id Int @id @default(autoincrement())
+  name String
+  description String @db.Text
+  techs String[] @db.Text
+  imageUrl  String?
+  url String?
+  createdAt    DateTime  @default(now())
+  updateAt DateTime?
+}
+
+model Experience {
+  id Int @id @default(autoincrement())
+  job String
+  company String
+  description String? @db.Text
+  start DateTime?
+  end DateTime?
+  urlCompany String?
+  createdAt DateTime @default(now())
+  updateAt DateTime?
+}
+
+model Education {
+  id Int @id @default(autoincrement())
+  study String
+  institution String
+  description String? @db.Text
+  start DateTime?
+  end DateTime?
+  urlInstitution String?
+  createdAt DateTime @default(now())
+  updateAt DateTime?
+}
+
+model Certification {
+  id Int @id @default(autoincrement())
+  title String
+  description String?
+  start DateTime?
+  end DateTime?
+  imageUrl String?
+  createdAt DateTime @default(now())
+  updateAt DateTime?
+}
+
+model Skill {
+  id Int @id @default(autoincrement())
+  name String
+  createdAt DateTime @default(now())
+  updateAt DateTime?
+}
