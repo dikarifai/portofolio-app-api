@@ -19,13 +19,11 @@ const route = express.Router();
 
 route.get("/", async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const portfolio = await getAllPortfolio();
-
-    console.log("Get Portfolio", portfolio);
+    const portfolios = await getAllPortfolio();
 
     res.send({
       status: "success",
-      data: portfolio,
+      data: portfolios,
     });
   } catch (error) {
     next(error);

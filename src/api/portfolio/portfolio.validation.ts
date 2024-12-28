@@ -14,4 +14,4 @@ export const patchPortfolioScema = Joi.object({
   techs: Joi.array().items(Joi.string().optional()),
   imageUrl: Joi.string().optional(),
   url: Joi.string().optional(),
-});
+}).min(1);

@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
-import portofolioController from "./api/portfolio/portfolio.controller";
+import portfolioController from "./api/portfolio/portfolio.controller";
+import experienceController from "./api/experience/experience.controller";
 import { errorHandler, notFound } from "./middlewares/error.middleware";
 
 const app = express();
@@ -9,7 +10,9 @@ app.use(express.json());
 
 app.use("/uploads", express.static("uploads"));
 
-app.use("/portfolio", portofolioController);
+app.use("/portfolios", portfolioController);
+
+app.use("/experiences", experienceController);
 
 app.use(notFound);
 app.use(errorHandler);
