@@ -34,6 +34,7 @@ export const putExperienceById = async (id: number, body: Experience) => {
 };
 
 export const deleteExperienceById = async (id: number) => {
+  await getExperienceById(id);
   const experience = await deleteExperience(id);
 
   return experience;
