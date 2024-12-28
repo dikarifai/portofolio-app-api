@@ -3,6 +3,7 @@ import portfolioController from "./api/portfolio/portfolio.controller";
 import experienceController from "./api/experience/experience.controller";
 import educationController from "./api/education/education.controller";
 import skillController from "./api/skill/skill.controller";
+import summaryController from "./api/summary/summary.controller";
 import { errorHandler, notFound } from "./middlewares/error.middleware";
 
 const app = express();
@@ -19,6 +20,8 @@ app.use("/experiences", experienceController);
 app.use("/educations", educationController);
 
 app.use("/skills", skillController);
+
+app.use("/summaries", summaryController);
 
 app.use(notFound);
 app.use(errorHandler);
