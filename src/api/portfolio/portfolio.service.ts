@@ -9,9 +9,9 @@ import {
 import { Portfolio } from "./portfolio.type";
 
 export const getAllPortfolio = async () => {
-  const portfolio = await findAllPortofolio();
+  const portfolios = await findAllPortofolio();
 
-  return portfolio;
+  return portfolios;
 };
 export const getPortfolioById = async (id: number) => {
   const portfolio = await findPortofolioById(id);

@@ -14,18 +14,17 @@ import { validateRequest } from "../../middlewares/validate.middleware";
 import { RequestPortfolio } from "./portfolio.type";
 import upload from "../../middlewares/upload.middleware";
 import parse from "../../middlewares/parse.middleware";
+import { getFullFileUrl } from "../../utils/url.util";
 
 const route = express.Router();
 
 route.get("/", async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const portfolio = await getAllPortfolio();
-
-    console.log("Get Portfolio", portfolio);
+    const portfolios = await getAllPortfolio();
 
     res.send({
       status: "success",
-      data: portfolio,
+      data: portfolios,
     });
   } catch (error) {
     next(error);
@@ -54,6 +53,10 @@ route.post(
   upload.single("image"),
   validateRequest(createPortfolioScema),
   async (req: RequestPortfolio, res: Response, next: NextFunction) => {
+    const file = req.file;
+    if (file && file.path) {
+      req.body.imageUrl = getFullFileUrl(file?.path);
+    }
     try {
       const portfolio = await postPortfolio(req.body);
 
@@ -72,6 +75,10 @@ route.put(
   upload.single("image"),
   validateRequest(createPortfolioScema),
   async (req: RequestPortfolio, res: Response, next: NextFunction) => {
+    const file = req.file;
+    if (file && file.path) {
+      req.body.imageUrl = getFullFileUrl(file?.path);
+    }
     const id = Number(req.params.id);
     const body = req.body;
     try {
@@ -92,6 +99,10 @@ route.patch(
   upload.single("image"),
   validateRequest(patchPortfolioScema),
   async (req: RequestPortfolio, res: Response, next: NextFunction) => {
+    const file = req.file;
+    if (file && file.path) {
+      req.body.imageUrl = getFullFileUrl(file?.path);
+    }
     const id = Number(req.params.id);
     const body = req.body;
     try {
