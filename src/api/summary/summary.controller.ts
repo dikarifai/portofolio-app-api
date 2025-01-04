@@ -24,10 +24,6 @@ route.post(
   validateRequest(postSummarySchema),
   async (req: SummaryRequest, res: Response, next: NextFunction) => {
     const body = req.body;
-    req.body.imageUrls = (req.files as Express.Multer.File[]).map((file) =>
-      getFullFileUrl(file.path)
-    );
-
     try {
       const summary = await postSummary(body);
 

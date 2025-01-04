@@ -53,10 +53,6 @@ route.post(
   upload.single("image"),
   validateRequest(createPortfolioScema),
   async (req: RequestPortfolio, res: Response, next: NextFunction) => {
-    const file = req.file;
-    if (file && file.path) {
-      req.body.imageUrl = getFullFileUrl(file?.path);
-    }
     try {
       const portfolio = await postPortfolio(req.body);
 
@@ -75,10 +71,6 @@ route.put(
   upload.single("image"),
   validateRequest(createPortfolioScema),
   async (req: RequestPortfolio, res: Response, next: NextFunction) => {
-    const file = req.file;
-    if (file && file.path) {
-      req.body.imageUrl = getFullFileUrl(file?.path);
-    }
     const id = Number(req.params.id);
     const body = req.body;
     try {
@@ -99,10 +91,6 @@ route.patch(
   upload.single("image"),
   validateRequest(patchPortfolioScema),
   async (req: RequestPortfolio, res: Response, next: NextFunction) => {
-    const file = req.file;
-    if (file && file.path) {
-      req.body.imageUrl = getFullFileUrl(file?.path);
-    }
     const id = Number(req.params.id);
     const body = req.body;
     try {
