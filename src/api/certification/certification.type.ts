@@ -2,7 +2,7 @@ import { Request } from "express";
 
 export interface Certification {
   id: number; // Auto-incrementing ID
-  title: string; // Required title field
+  name: string; // Required title field
   description?: string; // Optional description
   start?: Date; // Optional start date
   end?: Date; // Optional end date

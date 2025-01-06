@@ -2,7 +2,7 @@ import { Request } from "express";
 
 export interface Experience {
   id: number; // Auto-incrementing identifier
-  job: string; // Job title
+  name: string; // Job title
   company: string; // Company name
   description?: string; // Optional description, longer text
   start?: Date; // Optional start date
