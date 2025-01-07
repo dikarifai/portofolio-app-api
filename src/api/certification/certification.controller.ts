@@ -1,9 +1,17 @@
 import express, { NextFunction, Request, Response } from "express";
-import { getAllCertificate, postCertificate } from "./certification.service";
+import {
+  deleteCertificate,
+  getAllCertificate,
+  postCertificate,
+  putCertificateById,
+} from "./certification.service";
 import { CertificationRequest } from "./certification.type";
 import upload from "../../middlewares/upload.middleware";
 import { validateRequest } from "../../middlewares/validate.middleware";
-import { certificationCreateSchema } from "./certification.validate";
+import {
+  certificationCreateSchema,
+  certificationPatchSchema,
+} from "./certification.validate";
 
 const router = express.Router();
 
@@ -31,6 +39,64 @@ router.post(
 
       res.send({
         status: "success",
+        data: certificate,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+router.delete(
+  "/:id",
+  async (req: Request, res: Response, next: NextFunction) => {
+    const id = Number(req.params.id);
+    try {
+      const certificate = await deleteCertificate(id);
+
+      res.send({
+        status: "success",
+        message: "data has been deleted",
+        data: certificate,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+router.patch(
+  "/:id",
+  upload.single("image"),
+  validateRequest(certificationPatchSchema),
+  async (req: Request, res: Response, next: NextFunction) => {
+    const id = Number(req.params.id);
+    const { body } = req;
+    try {
+      const certificate = await putCertificateById(body, id);
+
+      res.send({
+        status: "success",
+        message: "data has been updated",
+        data: certificate,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+router.put(
+  "/:id",
+  upload.single("image"),
+  validateRequest(certificationCreateSchema),
+  async (req: Request, res: Response, next: NextFunction) => {
+    const id = Number(req.params.id);
+    const { body } = req;
+    try {
+      const certificate = await putCertificateById(body, id);
+
+      res.send({
+        status: "success",
+        message: "data has been updated",
         data: certificate,
       });
     } catch (error) {
