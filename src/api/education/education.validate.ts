@@ -1,7 +1,7 @@
 import Joi from "joi";
 
 export const postEducationSchema = Joi.object({
-  study: Joi.string().required(),
+  name: Joi.string().required(),
   institution: Joi.string().required(),
   description: Joi.string().allow(null).optional(),
   start: Joi.date().iso().allow(null).optional(),
@@ -10,7 +10,7 @@ export const postEducationSchema = Joi.object({
 });
 
 export const patchEducationSchema = Joi.object({
-  study: Joi.string().optional(),
+  name: Joi.string().optional(),
   institution: Joi.string().optional(),
   description: Joi.string().allow(null).optional(),
   start: Joi.date().iso().allow(null).optional(),

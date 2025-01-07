@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { ApiError } from "../utils/apiError.util";
+import { removeImage } from "../utils/url.util";
 
 interface ApiErrorType extends Error {
   statusCode?: number; // Status code bersifat opsional
@@ -20,7 +21,17 @@ export const errorHandler = (
   res: Response,
   next: NextFunction
 ) => {
-  console.log(error.statusCode);
+  const file = req.file;
+  const files = req.files as Express.Multer.File[];
+
+  if (file) {
+    removeImage(file?.path);
+  }
+  if (files) {
+    files.forEach((file) => {
+      removeImage(file.path);
+    });
+  }
 
   let resStatusCode = error.statusCode || 500;
 

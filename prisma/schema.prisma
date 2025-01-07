@@ -33,7 +33,7 @@ model Portfolio {
 
 model Experience {
   id Int @id @default(autoincrement())
-  job String
+  name String
   company String
   description String? @db.Text
   start DateTime?
@@ -45,7 +45,7 @@ model Experience {
 
 model Education {
   id Int @id @default(autoincrement())
-  study String
+  name String
   institution String
   description String? @db.Text
   start DateTime?
@@ -57,7 +57,7 @@ model Education {
 
 model Certification {
   id Int @id @default(autoincrement())
-  title String
+  name String
   description String?
   start DateTime?
   end DateTime?

@@ -2,7 +2,7 @@ import { Request } from "express";
 
 export interface Education {
   id: number;
-  study: string;
+  name: string;
   institution: string;
   description?: string | null;
   start?: Date | null;
